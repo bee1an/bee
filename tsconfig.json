@@ -7,7 +7,13 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["src/*"],
+      "@/components/*": ["src/components/*"],
+      "@/composables/*": ["src/composables/*"],
+      "@/pages/*": ["src/pages/*"],
+      "@/types/*": ["src/types/*"],
+      "@/data/*": ["src/data/*"],
+      "@/styles/*": ["src/styles/*"]
     },
     "resolveJsonModule": true,
     "types": [

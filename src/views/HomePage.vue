@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import PersonalInfo from '@/components/PersonalInfo.vue'
 import SkillsList from '@/components/SkillsList.vue'
 import TheFooter from '@/components/TheFooter.vue'

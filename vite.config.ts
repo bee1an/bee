@@ -14,7 +14,49 @@ export default defineConfig({
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
+      '@/': `${path.resolve(__dirname, 'src')}/`,
+      '@/components': `${path.resolve(__dirname, 'src/components')}`,
+      '@/composables': `${path.resolve(__dirname, 'src/composables')}`,
+      '@/pages': `${path.resolve(__dirname, 'src/pages')}`,
+      '@/types': `${path.resolve(__dirname, 'src/types')}`,
+      '@/data': `${path.resolve(__dirname, 'src/data')}`,
+      '@/styles': `${path.resolve(__dirname, 'src/styles')}`,
     },
+  },
+  build: {
+    target: 'es2020',
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vue-vendor': ['vue', 'vue-router'],
+          'utils': ['@vueuse/core'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
+    reportCompressedSize: false,
+  },
+  server: {
+    port: 3333,
+    open: true,
+    cors: true,
+  },
+  optimizeDeps: {
+    include: [
+      'vue',
+      'vue-router',
+      '@vueuse/core',
+    ],
   },
   plugins: [
     // https://github.com/posva/unplugin-vue-router
