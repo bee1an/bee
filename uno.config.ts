@@ -3,7 +3,6 @@ import {
   presetAttributify,
   presetIcons,
   presetUno,
-  presetWebFonts,
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
@@ -59,12 +58,12 @@ export default defineConfig({
       scale: 1.2,
       warn: true,
     }),
-    presetWebFonts({
-      fonts: {
-        sans: 'Inter:400,500,600,700',
-        mono: 'JetBrains Mono:400,500',
-      },
-    }),
+    // presetWebFonts({
+    //   fonts: {
+    //     sans: 'Inter:400,500,600,700',
+    //     mono: 'JetBrains Mono:400,500',
+    //   },
+    // }),
   ],
   transformers: [
     transformerDirectives(),

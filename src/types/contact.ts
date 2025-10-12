@@ -106,6 +106,7 @@ export function validateCustomField(field: CustomField): boolean {
       return /^[^\s@]+@[^\s@][^\s.@]*\.[^\s@]+$/.test(field.value)
     case 'url':
       try {
+        // eslint-disable-next-line no-new
         new URL(field.value)
         return true
       }
@@ -123,7 +124,7 @@ export function validateCustomField(field: CustomField): boolean {
 
 // 获取字段类型文本
 export function getFieldTypeText(type: string): string {
-  const typeTexts = {
+  const typeTexts: Record<string, string> = {
     text: '文本',
     email: '邮箱',
     url: '网址',
@@ -134,7 +135,7 @@ export function getFieldTypeText(type: string): string {
 
 // 获取首选联系方式文本
 export function getPreferredContactText(type: string): string {
-  const typeTexts = {
+  const typeTexts: Record<string, string> = {
     email: '邮箱',
     phone: '电话',
     social: '社交媒体',

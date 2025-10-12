@@ -81,7 +81,7 @@ export function validatePersonalInfo(personal: Partial<PersonalInfo>): Record<st
     errors.phone = '请输入有效的电话号码'
   }
 
-  if (personal.avatar && !/\.(jpg|jpeg|png|gif|webp)$/i.test(personal.avatar)) {
+  if (personal.avatar && !/\.(?:jpg|jpeg|png|gif|webp)$/i.test(personal.avatar)) {
     errors.avatar = '头像必须是有效的图片文件格式'
   }
 

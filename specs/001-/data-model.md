@@ -307,7 +307,7 @@ export const validators = {
   maxLength: (max: number) => (value: string) =>
     value.length <= max || `最多允许${max}个字符`,
   date: (value: string) =>
-    !isNaN(Date.parse(value)) || '请输入有效的日期',
+    !Number.isNaN(Date.parse(value)) || '请输入有效的日期',
   phone: (value: string) =>
     /^\+?[1-9]\d{0,15}$/.test(value) || '请输入有效的电话号码'
 }

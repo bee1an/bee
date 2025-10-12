@@ -71,12 +71,12 @@ export function validateExperience(experience: Partial<Experience>): Record<stri
   if (!experience.startDate) {
     errors.startDate = '开始日期为必填项'
   }
-  else if (!(experience.startDate instanceof Date) || isNaN(experience.startDate.getTime())) {
+  else if (!(experience.startDate instanceof Date) || Number.isNaN(experience.startDate.getTime())) {
     errors.startDate = '请提供有效的开始日期'
   }
 
   if (experience.endDate) {
-    if (!(experience.endDate instanceof Date) || isNaN(experience.endDate.getTime())) {
+    if (!(experience.endDate instanceof Date) || Number.isNaN(experience.endDate.getTime())) {
       errors.endDate = '请提供有效的结束日期'
     }
     else if (experience.startDate && experience.endDate < experience.startDate) {

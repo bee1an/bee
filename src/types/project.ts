@@ -157,7 +157,7 @@ export function getProjectStatusText(status: ProjectStatus): string {
 
 // 获取技术类别文本
 export function getTechnologyCategoryText(category: string): string {
-  const categoryTexts = {
+  const categoryTexts: Record<string, string> = {
     frontend: '前端',
     backend: '后端',
     database: '数据库',

@@ -8,7 +8,11 @@ export interface DataConfig {
 }
 
 // 导入类型定义
-import type { ContactInfo, Experience, PersonalInfo, Project, Skill } from '@/types'
+import type { ContactInfo } from '@/types/contact'
+import type { Experience } from '@/types/experience'
+import type { PersonalInfo } from '@/types/personal'
+import type { Project } from '@/types/project'
+import type { Skill } from '@/types/skill'
 
 // 初始化数据配置
 export const initialDataConfig: Partial<DataConfig> = {

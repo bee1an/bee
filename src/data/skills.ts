@@ -1,4 +1,4 @@
-import type { Skill, SkillCategory, SkillCategoryType } from '@/types/skill'
+import type { Skill, SkillCategory } from '@/types/skill'
 
 export const skillsData: Skill[] = [
   // 技术技能

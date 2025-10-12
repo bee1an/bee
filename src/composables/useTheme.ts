@@ -18,6 +18,30 @@ const darkThemeConfig: ThemeConfig = {
   textSecondary: '#9ca3af',
 }
 
+// 应用主题到文档
+function applyThemeToDocument(isDarkValue: boolean, configValue: ThemeConfig) {
+  const html = document.documentElement
+  if (isDarkValue) {
+    html.classList.add('dark')
+  }
+  else {
+    html.classList.remove('dark')
+  }
+
+  // 设置CSS变量
+  const root = document.documentElement
+  Object.entries(configValue).forEach(([key, value]) => {
+    root.style.setProperty(`--color-${key}`, value)
+  })
+}
+
+// 设置特定主题
+function setTheme(newTheme: Theme, themeRef: Ref<Theme>, configRef: ComputedRef<ThemeConfig>) {
+  themeRef.value = newTheme
+  localStorage.setItem('theme', newTheme)
+  applyThemeToDocument(themeRef.value === 'dark' || (themeRef.value === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches), configRef.value)
+}
+
 export function useTheme() {
   // 从localStorage读取保存的主题设置
   const storedTheme = localStorage.getItem('theme') as Theme
@@ -41,42 +65,18 @@ export function useTheme() {
     const themes: Theme[] = ['light', 'dark', 'auto']
     const currentIndex = themes.indexOf(theme.value)
     const nextTheme = themes[(currentIndex + 1) % themes.length]
-    setTheme(nextTheme)
-  }
-
-  // 设置特定主题
-  const setTheme = (newTheme: Theme) => {
-    theme.value = newTheme
-    localStorage.setItem('theme', newTheme)
-    applyThemeToDocument()
-  }
-
-  // 应用主题到文档
-  const applyThemeToDocument = () => {
-    const html = document.documentElement
-    if (isDark.value) {
-      html.classList.add('dark')
-    }
-    else {
-      html.classList.remove('dark')
-    }
-
-    // 设置CSS变量
-    const root = document.documentElement
-    Object.entries(config.value).forEach(([key, value]) => {
-      root.style.setProperty(`--color-${key}`, value)
-    })
+    setTheme(nextTheme, theme, config)
   }
 
   // 初始化主题
   const initTheme = () => {
-    applyThemeToDocument()
+    applyThemeToDocument(isDark.value, config.value)
 
     // 监听系统主题变化
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     const handleChange = () => {
       if (theme.value === 'auto') {
-        applyThemeToDocument()
+        applyThemeToDocument(isDark.value, config.value)
       }
     }
 
@@ -88,11 +88,10 @@ export function useTheme() {
     }
   }
 
-  // 在组件挂载时初始化
-  let cleanup: (() => void) | undefined
-
   // 监听主题变化
-  watch(theme, applyThemeToDocument)
+  watch(theme, () => {
+    applyThemeToDocument(isDark.value, config.value)
+  })
 
   return {
     theme: readonly(theme),

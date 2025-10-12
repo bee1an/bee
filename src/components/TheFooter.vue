@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const currentYear = new Date().getFullYear()
 
-const scrollToTop = () => {
+function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 </script>
